@@ -1,9 +1,11 @@
 package com.iessanalberto.dam1.jdbc.navigation;
 
+import com.iessanalberto.dam1.jdbc.models.Sala;
 import com.iessanalberto.dam1.jdbc.models.Usuario;
 import com.iessanalberto.dam1.jdbc.screens.LoginScreen;
 import com.iessanalberto.dam1.jdbc.screens.RegisterScreen;
 import com.iessanalberto.dam1.jdbc.screens.ReservaScreen;
+import com.iessanalberto.dam1.jdbc.screens.SalaScreen;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -37,6 +39,17 @@ public class Navigation {
                 Scene reservaScene = new Scene(reservaScreen.getRoot(), 320, 240);
                 stage.setTitle("Reserva");
                 stage.setScene(reservaScene);
+                stage.show();
+            }
+        }
+    }
+    public static void navigate(String destination, Sala sala) {
+        switch (destination) {
+            case "ReservaScreen" -> {
+                SalaScreen salaScreen = new SalaScreen(sala);
+                Scene salaScene = new Scene(salaScreen.getRoot(), 320, 240);
+                stage.setTitle("Butacas");
+                stage.setScene(salaScene);
                 stage.show();
             }
         }
