@@ -1,9 +1,10 @@
 package com.iessanalberto.dam1.jdbc.services;
 
+import com.iessanalberto.dam1.jdbc.models.Usuario;
 import com.iessanalberto.dam1.jdbc.repositories.LoginRepository;
 
 public class LoginServices {
-    public String login (String user, String password) throws Exception {
+    public Usuario login (String user, String password) throws Exception {
        LoginRepository loginRepository = new LoginRepository();
         if (user.isEmpty() || password.isEmpty()) {
             throw new Exception("Inserte usuario y contraseña");

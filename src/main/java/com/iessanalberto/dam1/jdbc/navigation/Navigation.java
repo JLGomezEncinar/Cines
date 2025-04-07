@@ -1,7 +1,9 @@
 package com.iessanalberto.dam1.jdbc.navigation;
 
+import com.iessanalberto.dam1.jdbc.models.Usuario;
 import com.iessanalberto.dam1.jdbc.screens.LoginScreen;
 import com.iessanalberto.dam1.jdbc.screens.RegisterScreen;
+import com.iessanalberto.dam1.jdbc.screens.ReservaScreen;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -17,17 +19,28 @@ public class Navigation {
                 stage.setScene(loginScene);
                 stage.show();
             }
-                case "RegisterScreen" -> {
-                    RegisterScreen registerScreen = new RegisterScreen();
-                    Scene registerScene = new Scene(registerScreen.getRoot(),320,240);
-                    stage.setTitle("Nuevo registro");
-                    stage.setScene(registerScene);
-                    stage.show();
+            case "RegisterScreen" -> {
+                RegisterScreen registerScreen = new RegisterScreen();
+                Scene registerScene = new Scene(registerScreen.getRoot(), 320, 240);
+                stage.setTitle("Nuevo registro");
+                stage.setScene(registerScene);
+                stage.show();
             }
 
         }
     }
-}
 
+    public static void navigate(String destination, Usuario usuario) {
+        switch (destination) {
+            case "ReservaScreen" -> {
+                ReservaScreen reservaScreen = new ReservaScreen(usuario);
+                Scene reservaScene = new Scene(reservaScreen.getRoot(), 320, 240);
+                stage.setTitle("Reserva");
+                stage.setScene(reservaScene);
+                stage.show();
+            }
+        }
+    }
+}
 
 

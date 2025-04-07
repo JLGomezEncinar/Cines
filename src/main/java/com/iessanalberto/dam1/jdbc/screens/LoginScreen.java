@@ -1,5 +1,6 @@
 package com.iessanalberto.dam1.jdbc.screens;
 
+import com.iessanalberto.dam1.jdbc.models.Usuario;
 import com.iessanalberto.dam1.jdbc.navigation.Navigation;
 import com.iessanalberto.dam1.jdbc.services.LoginServices;
 import javafx.geometry.Insets;
@@ -39,12 +40,13 @@ public class LoginScreen {
         root.getChildren().addAll(fila1, fila2, btnConectar,btnRegistrar);
         btnConectar.setOnAction(actionEvent -> {
             try {
-                String nombre = loginServices.login(txtUsuario.getText(), txtPassword.getText());
+                Usuario nombre = loginServices.login(txtUsuario.getText(), txtPassword.getText());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Conectado");
                 alert.setTitle("Bienvenido al otro lado");
                 alert.setContentText("Bienvenido señor/a " +nombre);
                 alert.showAndWait();
+                Navigation.navigate("ReservaScreen",nombre);
             } catch (Exception exception) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setHeaderText("Conexión no realizada");
