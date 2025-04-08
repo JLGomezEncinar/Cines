@@ -88,7 +88,7 @@ public class ReservaScreen {
             try {
                 Sala sala = ticketServices.cargarButacas(dtpFecha.getValue(),cmbPelicula.getValue(),cmbSala.getValue(),cmbHora.getValue());
 
-                Navigation.navigate("SalaScreen", sala);
+                Navigation.navigate("SalaScreen", sala, usuario);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

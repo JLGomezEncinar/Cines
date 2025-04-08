@@ -43,10 +43,10 @@ public class Navigation {
             }
         }
     }
-    public static void navigate(String destination, Sala sala) {
+    public static void navigate(String destination, Sala sala, Usuario usuario) {
         switch (destination) {
             case "SalaScreen" -> {
-                SalaScreen salaScreen = new SalaScreen(sala);
+                SalaScreen salaScreen = new SalaScreen(sala,usuario);
                 Scene salaScene = new Scene(salaScreen.getRoot(), 320, 240);
                 stage.setTitle("Butacas");
                 stage.setScene(salaScene);

@@ -10,4 +10,16 @@ public class Butaca {
         this.columna = columna;
         this.reservada = reservada;
     }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public boolean isReservada() {
+        return reservada;
+    }
 }
