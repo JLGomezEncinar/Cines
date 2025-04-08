@@ -23,7 +23,7 @@ public class TicketServices {
         return ticketRepository.cargarHoras(fecha,pelicula,sala);
     }
 
-    public Sala cargarButacas(String sala) throws Exception {
-        return ticketRepository.cargarButacas(sala);
+    public Sala cargarButacas(LocalDate fecha,String pelicula, String sala, LocalTime hora ) throws Exception {
+        return ticketRepository.cargarButacas(fecha,pelicula,sala,hora);
     }
 }

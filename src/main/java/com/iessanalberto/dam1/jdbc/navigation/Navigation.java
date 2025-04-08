@@ -45,7 +45,7 @@ public class Navigation {
     }
     public static void navigate(String destination, Sala sala) {
         switch (destination) {
-            case "ReservaScreen" -> {
+            case "SalaScreen" -> {
                 SalaScreen salaScreen = new SalaScreen(sala);
                 Scene salaScene = new Scene(salaScreen.getRoot(), 320, 240);
                 stage.setTitle("Butacas");

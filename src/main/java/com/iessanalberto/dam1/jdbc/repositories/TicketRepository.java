@@ -2,10 +2,7 @@ package com.iessanalberto.dam1.jdbc.repositories;
 
 import com.iessanalberto.dam1.jdbc.models.Sala;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -62,19 +59,24 @@ public class TicketRepository {
         return listaHoras;
     }
 
-    public Sala cargarButacas(String sala) throws Exception {
+    public Sala cargarButacas(LocalDate fecha, String pelicula, String sala, LocalTime hora) throws Exception {
         Sala sala1 = null;
         PreparedStatement preparedStatement = ConnectionDB.connect().prepareStatement(
-                "SELECT Numero_filas,Numero_columnas from Salas WHERE CONCAT (Numero,'-',Tipo) = ?");
+                "SELECT Numero_filas,Numero_columnas from Salas s INNER JOIN Realiza r on s.Id = r.Id INNER JOIN Proyeccion p ON p.Id=r.Id_proyeccion WHERE p.Fecha= ? AND r.Nombre_pelicula= ?  AND CONCAT (s.Numero,'-',Tipo) = ? AND p.Hora= ?");
 
 
-        preparedStatement.setString(1, sala);
+        preparedStatement.setDate(1, Date.valueOf(fecha));
+        preparedStatement.setString(2, pelicula);
+        preparedStatement.setString(3, sala);
+        preparedStatement.setTime(4, Time.valueOf(hora));
         ResultSet resultSet = preparedStatement.executeQuery();
+
         if (!resultSet.next()) {
-            sala1 = new Sala (resultSet.getInt("Numero_filas"),resultSet.getInt("Numero_columnas"));
+            throw new Exception ("Error al cargar la sala");
         } else
          {
-            throw new Exception ("Error al cargar la sala");
+
+             sala1 = new Sala (resultSet.getInt("Numero_filas"),resultSet.getInt("Numero_columnas"));
         }
         return sala1;
     }

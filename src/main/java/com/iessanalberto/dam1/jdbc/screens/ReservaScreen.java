@@ -23,13 +23,13 @@ public class ReservaScreen {
     private Label lblFecha = new Label("Elige fecha");
     private DatePicker dtpFecha = new DatePicker();
     private Label lblPelicula = new Label("Elige película");
-    ComboBox <String> cmbPelicula = new ComboBox();
+    private ComboBox <String> cmbPelicula = new ComboBox();
     private Label lblSala = new Label("Elige sala");
-    ComboBox <String> cmbSala = new ComboBox();
+    private ComboBox <String> cmbSala = new ComboBox();
     private Label lblHora = new Label("Elige hora");
-    ComboBox <LocalTime> cmbHora = new ComboBox();
-    Button btnReserva = new Button("Reserva");
-    TicketServices ticketServices = new TicketServices();
+    private ComboBox <LocalTime> cmbHora = new ComboBox();
+    private Button btnReserva = new Button("Reserva");
+    private TicketServices ticketServices = new TicketServices();
     public ReservaScreen(Usuario usuario)  {
     configurarLayout();
     agregarComponentes();
@@ -86,7 +86,7 @@ public class ReservaScreen {
         });
         btnReserva.setOnAction(event -> {
             try {
-                Sala sala = ticketServices.cargarButacas(cmbSala.getValue());
+                Sala sala = ticketServices.cargarButacas(dtpFecha.getValue(),cmbPelicula.getValue(),cmbSala.getValue(),cmbHora.getValue());
 
                 Navigation.navigate("SalaScreen", sala);
             } catch (Exception e) {

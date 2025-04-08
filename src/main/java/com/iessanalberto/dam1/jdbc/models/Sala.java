@@ -8,4 +8,12 @@ public class Sala {
         this.numFilas = numFilas;
         this.numColumnas = numColumnas;
     }
+
+    public int getNumFilas() {
+        return numFilas;
+    }
+
+    public int getNumColumnas() {
+        return numColumnas;
+    }
 }
