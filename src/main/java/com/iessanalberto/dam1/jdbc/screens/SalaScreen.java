@@ -3,7 +3,9 @@ package com.iessanalberto.dam1.jdbc.screens;
 import com.iessanalberto.dam1.jdbc.models.Butaca;
 import com.iessanalberto.dam1.jdbc.models.Sala;
 import com.iessanalberto.dam1.jdbc.models.Usuario;
+import com.iessanalberto.dam1.jdbc.navigation.Navigation;
 import com.iessanalberto.dam1.jdbc.services.SalaServices;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,6 +21,7 @@ public class SalaScreen {
     private ArrayList<Pair<Integer,Integer>> butacasReservadas = new ArrayList<>();
 
     private Button btnReservar = new Button("Reservar");
+    private Button btnVolver = new Button("Volver");
     SalaServices salaServices = new SalaServices();
 
     public SalaScreen(Sala sala, Usuario usuario) {
@@ -57,12 +60,28 @@ public class SalaScreen {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        root.getChildren().addAll(gridPane,btnReservar);
+        root.getChildren().addAll(gridPane,btnReservar,btnVolver);
 
         btnReservar.setOnAction(event -> {
-                for (Pair pair: butacasReservadas) {
-                    System.out.println(pair.getKey()+","+pair.getValue());
-                }
+
+            try {
+                salaServices.reservarButacas(sala.getIdSala(),sala.getNumSala(),butacasReservadas,sala.getIdProyeccion(),usuario.getUser());
+                Alert alert = new Alert (Alert.AlertType.INFORMATION);
+                alert.setHeaderText("");
+                alert.setTitle("");
+                alert.setContentText("Se ha realizado la reserva con éxito");
+                alert.showAndWait();
+            } catch (Exception exception) {
+                Alert alert = new Alert (Alert.AlertType.WARNING);
+                alert.setHeaderText("");
+                alert.setTitle("");
+                alert.setContentText(exception.getMessage());
+                alert.showAndWait();
+            }
+
+        });
+        btnVolver.setOnAction(actionEvent -> {
+            Navigation.navigate("ReservaScreen",usuario);
         });
 
     }
